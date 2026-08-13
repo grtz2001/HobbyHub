@@ -9,34 +9,31 @@
 // That's expected — the rubric asks for exactly this. Don't call it
 // authentication in the README.
 
-import { profiles } from '../data/dummy.js';
-
-const DELAY = 300;
-const wait = () => new Promise((r) => setTimeout(r, DELAY));
+import { supabase } from '../client';
 
 /** One profile. Returns null when the id doesn't exist. */
 export async function getProfile(id) {
-  await wait();
-  return profiles.find((p) => p.id === id) ?? null;
+  const { data, error } = await supabase.from('profiles').select('*').eq('id', id).maybeSingle();
+  if (error) throw error;
+  return data;
 }
 
 /**
  * Create a profile. Called once, by the name gate, on a visitor's first load.
- * `crypto.randomUUID()` is built into browsers — no uuid package needed.
+ * `crypto.randomUUID()` is built into browsers — no uuid package needed, and
+ * profiles.id has no database default, so it's generated here.
  */
 export async function createProfile(displayName) {
-  await wait();
-
   const name = displayName?.trim();
   if (!name) throw new Error('Please choose a display name.');
   if (name.length > 30) throw new Error('That name is a little long — 30 characters max.');
 
-  const profile = {
-    id: crypto.randomUUID(),
-    display_name: name,
-    created_at: new Date().toISOString(),
-  };
+  const { data, error } = await supabase
+    .from('profiles')
+    .insert({ id: crypto.randomUUID(), display_name: name })
+    .select()
+    .single();
 
-  profiles.push(profile);
-  return profile;
+  if (error) throw error;
+  return data;
 }

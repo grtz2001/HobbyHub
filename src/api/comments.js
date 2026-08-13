@@ -1,29 +1,20 @@
 // src/api/comments.js
 //
-// Comments belong to a post and are written by a profile. In Supabase these
-// come back with .select('*, profiles(id, display_name)') so the author
-// arrives attached — that's the shape these functions return.
+// Comments belong to a post and are written by a profile. Fetched with
+// .select('*, profiles(id, display_name)') so the author arrives attached.
 
-import { comments, profiles } from '../data/dummy.js';
-
-const DELAY = 300;
-const wait = () => new Promise((r) => setTimeout(r, DELAY));
-
-function withAuthor(comment) {
-  const author = profiles.find((p) => p.id === comment.author_id) ?? null;
-  return {
-    ...comment,
-    profiles: author ? { id: author.id, display_name: author.display_name } : null,
-  };
-}
+import { supabase } from '../client';
 
 /** A post's comments, oldest first — conversations read top to bottom. */
 export async function getComments(postId) {
-  await wait();
-  return comments
-    .filter((c) => c.post_id === Number(postId))
-    .sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
-    .map(withAuthor);
+  const { data, error } = await supabase
+    .from('comments')
+    .select('*, profiles(id, display_name)')
+    .eq('post_id', Number(postId))
+    .order('created_at', { ascending: true });
+
+  if (error) throw error;
+  return data ?? [];
 }
 
 /**
@@ -31,27 +22,20 @@ export async function getComments(postId) {
  * the caller can append it to state instead of refetching the whole list.
  */
 export async function createComment({ postId, authorId, content }) {
-  await wait();
-
   if (!content?.trim()) throw new Error('A comment cannot be empty.');
-  if (!authorId) throw new Error('A comment needs an author.');
 
-  const comment = {
-    id: Math.max(0, ...comments.map((c) => c.id)) + 1,
-    created_at: new Date().toISOString(),
-    post_id: Number(postId),
-    author_id: authorId,
-    content: content.trim(),
-  };
+  const { data, error } = await supabase
+    .from('comments')
+    .insert({ post_id: Number(postId), author_id: authorId, content: content.trim() })
+    .select('*, profiles(id, display_name)')
+    .single();
 
-  comments.push(comment);
-  return withAuthor(comment);
+  if (error) throw error;
+  return data;
 }
 
 /** Delete a comment. Check ownership in the component before calling this. */
 export async function deleteComment(id) {
-  await wait();
-  const i = comments.findIndex((c) => c.id === Number(id));
-  if (i === -1) throw new Error('Comment not found.');
-  comments.splice(i, 1);
+  const { error } = await supabase.from('comments').delete().eq('id', Number(id));
+  if (error) throw error;
 }

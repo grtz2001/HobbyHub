@@ -4,26 +4,7 @@
 // rules in CLAUDE.md's Data model section. They render in exactly one
 // place: the Diary tab of the profile that owns them.
 
-import { watch_logs, shows } from '../data/dummy.js';
-
-const DELAY = 300;
-const wait = () => new Promise((r) => setTimeout(r, DELAY));
-
-function withShow(log) {
-  const show = shows.find((s) => s.id === log.show_id) ?? null;
-  return {
-    id: log.id,
-    created_at: log.created_at,
-    watched_on: log.watched_on,
-    venue: log.venue,
-    rating: log.rating,
-    note: log.note,
-    show_id: log.show_id,
-    shows: show
-      ? { id: show.id, slug: show.slug, title: show.title, poster_url: show.poster_url }
-      : null,
-  };
-}
+import { supabase } from '../client';
 
 /**
  * Numbers rewatches. Logs arrive newest-first, so the first time we meet a
@@ -48,48 +29,44 @@ function withWatchNumbers(logs) {
 
 /** One user's diary, newest first, with rewatch numbers attached. */
 export async function getWatchLogsByUser(userId) {
-  await wait();
-  const rows = watch_logs
-    .filter((w) => w.user_id === userId)
-    .sort((a, b) => {
-      if (a.watched_on !== b.watched_on) return a.watched_on < b.watched_on ? 1 : -1;
-      return b.id - a.id; // tiebreaker: newest entry first within a day
-    })
-    .map(withShow);
+  const { data, error } = await supabase
+    .from('watch_logs')
+    .select('id, created_at, watched_on, venue, rating, note, show_id, shows(id, slug, title, poster_url)')
+    .eq('user_id', userId)
+    .order('watched_on', { ascending: false })
+    .order('id', { ascending: false }); // tiebreaker: newest entry first within a day
 
-  return withWatchNumbers(rows);
+  if (error) throw error;
+  return withWatchNumbers(data ?? []);
 }
 
 /** Log a watch. Show and date are required; venue, rating, and note are not. */
 export async function createWatchLog({ userId, showId, watchedOn, venue, rating, note }) {
-  await wait();
-
-  if (!userId) throw new Error('A watch log needs a user.');
   if (!showId) throw new Error('A watch log must name a show.');
   if (!watchedOn) throw new Error('A watch log needs a date.');
   if (rating != null && (rating < 1 || rating > 5)) {
     throw new Error('Rating must be between 1 and 5.');
   }
 
-  const log = {
-    id: Math.max(0, ...watch_logs.map((w) => w.id)) + 1,
-    created_at: new Date().toISOString(),
-    user_id: userId,
-    show_id: Number(showId),
-    watched_on: watchedOn,
-    venue: venue?.trim() || null,
-    rating: rating ? Number(rating) : null,
-    note: note?.trim() || null,
-  };
+  const { data, error } = await supabase
+    .from('watch_logs')
+    .insert({
+      user_id: userId,
+      show_id: Number(showId),
+      watched_on: watchedOn, // 'YYYY-MM-DD' straight from <input type="date">
+      venue: venue?.trim() || null,
+      rating: rating ? Number(rating) : null,
+      note: note?.trim() || null,
+    })
+    .select('id, created_at, watched_on, venue, rating, note, show_id, shows(id, slug, title, poster_url)')
+    .single();
 
-  watch_logs.push(log);
-  return withShow(log);
+  if (error) throw error;
+  return data;
 }
 
 /** Delete a watch log. Check ownership in the component before calling this. */
 export async function deleteWatchLog(id) {
-  await wait();
-  const i = watch_logs.findIndex((w) => w.id === Number(id));
-  if (i === -1) throw new Error('Watch log not found.');
-  watch_logs.splice(i, 1);
+  const { error } = await supabase.from('watch_logs').delete().eq('id', Number(id));
+  if (error) throw error;
 }

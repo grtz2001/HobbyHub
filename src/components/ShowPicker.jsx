@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getShowOptions, findOrCreateShow } from '../api/shows';
 import showTitles from '../data/showTitles.json';
 import './ShowPicker.css';
@@ -9,8 +9,13 @@ import './ShowPicker.css';
 export default function ShowPicker({ value, onChange, required = false }) {
   const [query, setQuery] = useState('');
   const [adding, setAdding] = useState(false);
+  const [options, setOptions] = useState([]);
 
-  const options = getShowOptions();
+  // Loaded once on mount, then filtered locally on every keystroke.
+  useEffect(() => {
+    getShowOptions().then(setOptions);
+  }, []);
+
   const q = query.trim().toLowerCase();
 
   const matchingShows = q
