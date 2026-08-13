@@ -1,0 +1,35 @@
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 48px 0;
+}
+
+.empty-state h3 {
+  font-size: 28px;
+}
+
+.empty-state__subtitle {
+  font-family: var(--font-body);
+  font-size: 17px;
+  color: var(--ink-soft);
+}
+
+.empty-state--bordered {
+  border: 2px solid var(--ink);
+  padding: 24px;
+  align-items: flex-start;
+}
+
+.empty-state--bordered h3 {
+  font-size: 24px;
+}
+
+.empty-state--bordered .empty-state__subtitle {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}

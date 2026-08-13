@@ -1,0 +1,23 @@
+.comment-list {
+  border-top: var(--rule-hair);
+}
+
+.comment-list__item {
+  padding: 22px 0;
+  border-bottom: var(--rule-hair);
+}
+
+.comment-list__item p.meta {
+  margin: 0 0 10px;
+}
+
+.comment-list__body {
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  max-width: 62ch;
+}
+
+.comment-list__empty {
+  padding: 14px 0;
+}

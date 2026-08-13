@@ -1,111 +1,222 @@
+/* Playbill Classic — design tokens and global styles. See docs/encore-spec.md §8. */
+
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  --paper: #f5f1e6;
+  --paper-deep: #eae3d2;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+  --ink: #14110e;
+  --ink-soft: #5c5548;
+  --ink-faint: #9c9484;
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --marquee: #f2c230;
+  --accent: #8c1c13;
+  --danger: var(--accent);
 
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
+  --rule: 2px solid var(--ink);
+  --rule-hair: 1px solid var(--ink);
+
+  --font-display: 'Anton', 'Oswald', Impact, sans-serif;
+  --font-body: 'Libre Baskerville', Georgia, serif;
+  --font-ui: 'Archivo', 'Helvetica Neue', sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
+[data-theme='night'] {
+  --paper: #14110e;
+  --paper-deep: #1f1b16;
+  --ink: #f5f1e6;
+  --ink-soft: #b8ae9a;
+  --ink-faint: #6b6353;
+  --danger: #e8705f;
 }
 
-body {
-  margin: 0;
-}
-
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
+* {
   box-sizing: border-box;
 }
 
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--paper);
 }
 
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
+body {
+  color: var(--ink);
+  font-family: var(--font-ui);
 }
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
+
+button,
+input,
+select,
+textarea {
+  font-family: var(--font-ui);
+  color: var(--ink);
+  border-radius: 0;
 }
+
+img {
+  border-radius: 0;
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+a:hover {
+  color: var(--ink-soft);
+}
+
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+::placeholder {
+  color: var(--ink-faint);
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
 p {
   margin: 0;
 }
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
+/* ---------------------------------------------------------- utilities */
+
+.page {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px;
 }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+.rule {
+  border: none;
+  border-top: var(--rule);
+  margin: 0;
+}
+
+.rule-hair {
+  border: none;
+  border-top: var(--rule-hair);
+  margin: 0;
+}
+
+.meta {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font: 600 12px/1 var(--font-ui);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 13px 20px;
+  background: var(--ink);
+  color: var(--paper);
+  border: 2px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn:hover {
+  background: var(--paper);
+  color: var(--ink);
+  border-color: var(--ink);
+}
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  font: 600 12px/1 var(--font-ui);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 12px 18px;
+  background: none;
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  cursor: pointer;
+}
+.btn-outline:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.btn-danger {
+  font: 600 12px/1 var(--font-ui);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 12px 18px;
+  background: none;
+  color: var(--danger);
+  border: 1px solid var(--danger);
+  cursor: pointer;
+}
+
+.btn-text-danger {
+  background: none;
+  border: none;
+  padding: 2px 0;
+  cursor: pointer;
+  font: 600 11px/1 var(--font-ui);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--danger);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.field label {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.field input,
+.field textarea,
+.field select {
+  background: var(--paper-deep);
+  border: 1px solid var(--ink);
+  padding: 12px;
+  font-size: 14px;
+}
+.field .help {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--ink-faint);
+}
+
+@keyframes bulb {
+  0%,
+  80%,
+  100% {
+    opacity: 0.22;
+  }
+  40% {
+    opacity: 1;
+  }
 }

@@ -1,0 +1,19 @@
+.comment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.comment-form textarea {
+  width: 100%;
+  background: var(--paper-deep);
+  border: 1px solid var(--ink);
+  padding: 12px;
+  font-size: 14px;
+  resize: vertical;
+}
+
+.comment-form .btn {
+  align-self: flex-start;
+}

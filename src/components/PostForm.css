@@ -1,0 +1,17 @@
+.post-form {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.post-form__submit {
+  width: 100%;
+  justify-content: center;
+  padding: 16px;
+}
+
+.post-form__error {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  color: var(--danger);
+}

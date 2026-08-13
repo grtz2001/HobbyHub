@@ -1,0 +1,39 @@
+.post-card {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px 28px;
+  align-items: center;
+  padding: 30px 0;
+  border-bottom: var(--rule-hair);
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.post-card__time {
+  grid-column: 1;
+}
+
+.post-card__title {
+  grid-column: 1;
+  font-family: var(--font-display);
+  font-size: 24px;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+.post-card__bravos {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.post-card__triangle {
+  font-size: 11px;
+}

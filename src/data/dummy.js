@@ -1,474 +1,109 @@
 // src/data/dummy.js
 //
-// Temporary stand-in for the Supabase database. Mirrors the four tables in
-// docs/spec.md §3 exactly: same column names, same nullability, same ids.
-// Generated from supabase/seed.sql, so the two cannot drift.
+// Temporary stand-in for the Supabase database. Mirrors the five tables in
+// docs/encore-spec.md §3 exactly: same column names, same nullability.
 //
 // Rows are FLAT here, like real database tables. src/api/ does the joining
-// and hands components the nested shape Supabase returns. When you swap to
-// Supabase, this file is deleted and nothing else changes.
+// and hands components the nested shape Supabase returns. When Supabase is
+// wired up, this file is deleted and nothing else changes.
 //
 // Timestamps are computed at load time from a minutes-ago offset, so
-// "2 hours ago" stays accurate no matter when you run the app.
+// "2 hours ago" stays accurate no matter when you run the app. watch_logs
+// use fixed calendar dates instead, since a diary is dated, not relative.
 
 const ago = (minutes) => new Date(Date.now() - minutes * 60000).toISOString();
 
 // --------------------------------------------------------------- shows
 export const shows = [
-  {
-    "id": 1,
-    "slug": "hadestown",
-    "title": "Hadestown",
-    "opening_year": 2019,
-    "poster_url": "https://placehold.co/400x600/14110E/F2C230?text=Hadestown"
-  },
-  {
-    "id": 2,
-    "slug": "sunset-boulevard",
-    "title": "Sunset Boulevard",
-    "opening_year": 1993,
-    "poster_url": "https://placehold.co/400x600/14110E/F2C230?text=Sunset+Boulevard"
-  },
-  {
-    "id": 3,
-    "slug": "kimberly-akimbo",
-    "title": "Kimberly Akimbo",
-    "opening_year": 2022,
-    "poster_url": "https://placehold.co/400x600/14110E/F2C230?text=Kimberly+Akimbo"
-  },
-  {
-    "id": 4,
-    "slug": "maybe-happy-ending",
-    "title": "Maybe Happy Ending",
-    "opening_year": 2024,
-    "poster_url": "https://placehold.co/400x600/14110E/F2C230?text=Maybe+Happy+Ending"
-  },
-  {
-    "id": 5,
-    "slug": "six",
-    "title": "Six",
-    "opening_year": 2021,
-    "poster_url": "https://placehold.co/400x600/14110E/F2C230?text=Six"
-  },
-  {
-    "id": 6,
-    "slug": "merrily-we-roll-along",
-    "title": "Merrily We Roll Along",
-    "opening_year": 1981,
-    "poster_url": "https://placehold.co/400x600/14110E/F2C230?text=Merrily"
-  },
-  {
-    "id": 7,
-    "slug": "sweeney-todd",
-    "title": "Sweeney Todd",
-    "opening_year": 1979,
-    "poster_url": "https://placehold.co/400x600/14110E/F2C230?text=Sweeney+Todd"
-  },
-  {
-    "id": 8,
-    "slug": "into-the-woods",
-    "title": "Into the Woods",
-    "opening_year": 1987,
-    "poster_url": "https://placehold.co/400x600/14110E/F2C230?text=Into+the+Woods"
-  },
-  {
-    "id": 9,
-    "slug": "next-to-normal",
-    "title": "Next to Normal",
-    "opening_year": 2009,
-    "poster_url": "https://placehold.co/400x600/14110E/F2C230?text=Next+to+Normal"
-  },
-  {
-    "id": 10,
-    "slug": "the-bands-visit",
-    "title": "The Band's Visit",
-    "opening_year": 2017,
-    "poster_url": "https://placehold.co/400x600/14110E/F2C230?text=The+Band%27s+Visit"
-  },
-  {
-    "id": 11,
-    "slug": "parade",
-    "title": "Parade",
-    "opening_year": 1998,
-    "poster_url": "https://placehold.co/400x600/14110E/F2C230?text=Parade"
-  },
-  {
-    "id": 12,
-    "slug": "company",
-    "title": "Company",
-    "opening_year": 1970,
-    "poster_url": "https://placehold.co/400x600/14110E/F2C230?text=Company"
-  },
-  {
-    "id": 13,
-    "slug": "floyd-collins",
-    "title": "Floyd Collins",
-    "opening_year": 1996,
-    "poster_url": "https://placehold.co/400x600/14110E/F2C230?text=Floyd+Collins"
-  },
-  {
-    "id": 14,
-    "slug": "bat-boy",
-    "title": "Bat Boy: The Musical",
-    "opening_year": 2001,
-    "poster_url": "https://placehold.co/400x600/14110E/F2C230?text=Bat+Boy"
-  }
+  { id: 1, slug: 'hadestown', title: 'Hadestown', opening_year: 2019, poster_url: 'https://placehold.co/400x600/14110E/F2C230?text=Hadestown' },
+  { id: 2, slug: 'sunset-boulevard', title: 'Sunset Boulevard', opening_year: 1993, poster_url: 'https://placehold.co/400x600/14110E/F2C230?text=Sunset+Boulevard' },
+  { id: 3, slug: 'kimberly-akimbo', title: 'Kimberly Akimbo', opening_year: 2022, poster_url: 'https://placehold.co/400x600/14110E/F2C230?text=Kimberly+Akimbo' },
+  { id: 4, slug: 'maybe-happy-ending', title: 'Maybe Happy Ending', opening_year: 2024, poster_url: 'https://placehold.co/400x600/14110E/F2C230?text=Maybe+Happy+Ending' },
+  { id: 5, slug: 'six', title: 'Six', opening_year: 2021, poster_url: 'https://placehold.co/400x600/14110E/F2C230?text=Six' },
+  { id: 6, slug: 'merrily-we-roll-along', title: 'Merrily We Roll Along', opening_year: 1981, poster_url: 'https://placehold.co/400x600/14110E/F2C230?text=Merrily' },
+  { id: 7, slug: 'sweeney-todd', title: 'Sweeney Todd', opening_year: 1979, poster_url: 'https://placehold.co/400x600/14110E/F2C230?text=Sweeney+Todd' },
+  { id: 8, slug: 'into-the-woods', title: 'Into the Woods', opening_year: 1987, poster_url: 'https://placehold.co/400x600/14110E/F2C230?text=Into+the+Woods' },
+  { id: 9, slug: 'next-to-normal', title: 'Next to Normal', opening_year: 2009, poster_url: 'https://placehold.co/400x600/14110E/F2C230?text=Next+to+Normal' },
+  { id: 10, slug: 'the-bands-visit', title: "The Band's Visit", opening_year: 2017, poster_url: "https://placehold.co/400x600/14110E/F2C230?text=The+Band%27s+Visit" },
+  { id: 11, slug: 'parade', title: 'Parade', opening_year: 1998, poster_url: 'https://placehold.co/400x600/14110E/F2C230?text=Parade' },
+  { id: 12, slug: 'company', title: 'Company', opening_year: 1970, poster_url: 'https://placehold.co/400x600/14110E/F2C230?text=Company' },
+  { id: 13, slug: 'floyd-collins', title: 'Floyd Collins', opening_year: 1996, poster_url: 'https://placehold.co/400x600/14110E/F2C230?text=Floyd+Collins' },
+  { id: 14, slug: 'bat-boy', title: 'Bat Boy: The Musical', opening_year: 2001, poster_url: 'https://placehold.co/400x600/14110E/F2C230?text=Bat+Boy' },
+  // Added through the ShowPicker by a user — no poster, no opening year.
+  // Exists specifically to exercise the no-poster fallback tile on /shows.
+  { id: 15, slug: 'suffs', title: 'Suffs', opening_year: null, poster_url: null },
 ];
 
 // ------------------------------------------------------------ profiles
 export const profiles = [
-  { id: 'a1111111-1111-4111-8111-111111111111', display_name: 'ellis_w', created_at: ago(115200) },
-  { id: 'a2222222-2222-4222-8222-222222222222', display_name: 'quietriot', created_at: ago(106560) },
-  { id: 'a3333333-3333-4333-8333-333333333333', display_name: 'marguerite', created_at: ago(95040) },
-  { id: 'a4444444-4444-4444-8444-444444444444', display_name: 'j_okonkwo', created_at: ago(87840) },
-  { id: 'a5555555-5555-4555-8555-555555555555', display_name: 'thea_r', created_at: ago(74880) },
-  { id: 'a6666666-6666-4666-8666-666666666666', display_name: 'sondheimer', created_at: ago(64800) },
-  { id: 'a7777777-7777-4777-8777-777777777777', display_name: 'dev_patel_nyc', created_at: ago(43200) },
-  { id: 'a8888888-8888-4888-8888-888888888888', display_name: 'harriet_l', created_at: ago(25920) },
+  { id: 'a1111111-1111-4111-8111-111111111111', display_name: 'ellis_w', created_at: ago(60 * 24 * 150) },
+  { id: 'a2222222-2222-4222-8222-222222222222', display_name: 'quietriot', created_at: ago(60 * 24 * 120) },
+  { id: 'a3333333-3333-4333-8333-333333333333', display_name: 'mezzo_forte', created_at: ago(60 * 24 * 95) },
+  { id: 'a4444444-4444-4444-8444-444444444444', display_name: 'balcony_rail', created_at: ago(60 * 24 * 80) },
+  { id: 'a5555555-5555-4555-8555-555555555555', display_name: 'standing_o', created_at: ago(60 * 24 * 60) },
+  { id: 'a6666666-6666-4666-8666-666666666666', display_name: 'matinee_kid', created_at: ago(60 * 24 * 40) },
 ];
 
-// --------------------------------------------------------------- posts
-// type 'review'     -> always has show_id and rating
-// type 'discussion' -> never has rating; show_id may be null (general)
+const ELLIS = 'a1111111-1111-4111-8111-111111111111';
+const QUIETRIOT = 'a2222222-2222-4222-8222-222222222222';
+const MEZZO = 'a3333333-3333-4333-8333-333333333333';
+const BALCONY = 'a4444444-4444-4444-8444-444444444444';
+const STANDING_O = 'a5555555-5555-4555-8555-555555555555';
+const MATINEE = 'a6666666-6666-4666-8666-666666666666';
+
+// --------------------------------------------------------- watch_logs
+// The Letterboxd diary. Profile-only — never joined into posts or shows.
+// Deliberately no unique constraint on (user_id, show_id): ellis_w logs
+// Hadestown three times on purpose, so the rewatch badge has something to
+// number. One entry has no venue, one has no rating — both null cases the
+// diary has to render cleanly.
+export const watch_logs = [
+  { id: 1, created_at: ago(60 * 24 * 5), user_id: ELLIS, show_id: 1, watched_on: '2026-03-03', venue: 'Bernard B. Jacobs Theatre', rating: 5, note: 'Third time and the first time I watched the Fates instead of Orpheus. Different show entirely.' },
+  { id: 2, created_at: ago(60 * 24 * 10), user_id: ELLIS, show_id: 2, watched_on: '2026-02-27', venue: null, rating: 3, note: 'Handsome, cold, and about forty minutes too pleased with itself.' },
+  { id: 3, created_at: ago(60 * 24 * 30), user_id: ELLIS, show_id: 1, watched_on: '2026-01-14', venue: 'Proshot at home', rating: 4, note: null },
+  { id: 4, created_at: ago(60 * 24 * 42), user_id: ELLIS, show_id: 3, watched_on: '2026-01-02', venue: 'Booth Theatre', rating: null, note: "Didn't score it. I need to sit with it a while longer before I put a number on it." },
+  { id: 5, created_at: ago(60 * 24 * 95), user_id: ELLIS, show_id: 1, watched_on: '2025-11-09', venue: 'Walter Kerr Theatre', rating: 3, note: 'Balcony, far right. Half the staging was a rumour from up there and I still went back twice.' },
+  { id: 6, created_at: ago(60 * 24 * 15), user_id: ELLIS, show_id: 6, watched_on: '2026-02-01', venue: 'Hudson Theatre', rating: 5, note: "Still the best “Not a Day Goes By” I've heard live." },
+  { id: 7, created_at: ago(60 * 24 * 12), user_id: QUIETRIOT, show_id: 9, watched_on: '2026-02-18', venue: 'Hudson Theatre', rating: 5, note: 'Sat in the front row and regretted my mascara.' },
+  { id: 8, created_at: ago(60 * 24 * 60), user_id: QUIETRIOT, show_id: 8, watched_on: '2025-10-15', venue: null, rating: 4, note: null },
+  { id: 9, created_at: ago(60 * 24 * 20), user_id: MEZZO, show_id: 12, watched_on: '2026-01-20', venue: 'Bernard B. Jacobs Theatre', rating: 4, note: null },
+  { id: 10, created_at: ago(60 * 24 * 70), user_id: MEZZO, show_id: 7, watched_on: '2025-11-22', venue: 'Lunt-Fontanne Theatre', rating: 5, note: null },
+  { id: 11, created_at: ago(60 * 24 * 55), user_id: BALCONY, show_id: 12, watched_on: '2025-12-05', venue: null, rating: 5, note: 'Patti would be proud.' },
+  { id: 12, created_at: ago(60 * 24 * 25), user_id: STANDING_O, show_id: 5, watched_on: '2026-02-10', venue: 'Lena Horne Theatre', rating: 4, note: null },
+  { id: 13, created_at: ago(60 * 24 * 18), user_id: STANDING_O, show_id: 11, watched_on: '2026-01-18', venue: 'Bernard B. Jacobs Theatre', rating: 5, note: null },
+  { id: 14, created_at: ago(60 * 24 * 32), user_id: MATINEE, show_id: 5, watched_on: '2026-01-05', venue: null, rating: 5, note: null },
+  { id: 15, created_at: ago(60 * 24 * 28), user_id: MATINEE, show_id: 3, watched_on: '2026-01-25', venue: 'Booth Theatre', rating: 4, note: null },
+];
+
+// -------------------------------------------------------------- posts
+// The public forum. No type, no rating — see the three rules in CLAUDE.md.
 export const posts = [
-  {
-    id: 1,
-    type: 'review',
-    author_id: 'a1111111-1111-4111-8111-111111111111',
-    show_id: 1,
-    title: 'A Hadestown that finally earns its ending',
-    content: 'I have seen this show four times and this is the first cast that made the walk out of the underworld feel genuinely uncertain. You know how it goes. Everyone in the theatre knows how it goes. And somehow the staging still had me leaning forward. The turntable work in the second act does so much quiet storytelling that I did not notice on my first two visits.',
-    image_url: 'https://placehold.co/800x500/14110E/F2C230?text=Hadestown',
-    rating: 5,
-    upvotes: 91,
-    created_at: ago(120),
-  },
+  { id: 1, created_at: ago(120), author_id: MEZZO, show_id: null, title: 'In the Heights needs a revival', content: null, image_url: null, upvotes: 91 },
   {
     id: 2,
-    type: 'review',
-    author_id: 'a4444444-4444-4444-8444-444444444444',
-    show_id: 2,
-    title: 'Sunset Blvd is all spectacle and no spine',
-    content: 'The camera work is genuinely inventive and I understand why people are losing their minds over the staging. But stripping the show down this far exposes how little is underneath. Every design choice is doing something interesting and none of them are doing it in the same direction. I left impressed and completely unmoved.',
-    image_url: null,
-    rating: 3,
-    upvotes: 47,
     created_at: ago(300),
-  },
-  {
-    id: 3,
-    type: 'review',
-    author_id: 'a5555555-5555-4555-8555-555555555555',
-    show_id: 3,
-    title: 'Kimberly Akimbo is the only show that has made me cry at a bowling alley set',
-    content: 'Nothing prepared me for how funny this is, and being that funny is exactly what makes the last fifteen minutes land the way they do. It refuses to be sentimental right up until the moment it earns the right to be. The teenage ensemble numbers are doing more structural work than they get credit for.',
-    image_url: 'https://placehold.co/800x500/14110E/F2C230?text=Kimberly+Akimbo',
-    rating: 5,
-    upvotes: 68,
-    created_at: ago(660),
-  },
-  {
-    id: 4,
-    type: 'review',
-    author_id: 'a7777777-7777-4777-8777-777777777777',
-    show_id: 4,
-    title: 'Maybe Happy Ending has no business being this good',
-    content: 'A two-hander about obsolete helper robots should not work. It works. The design is doing something I have never seen on a Broadway stage and the score is doing something I have not heard in decades. Go in knowing nothing.',
-    image_url: 'https://placehold.co/800x500/14110E/F2C230?text=Maybe+Happy+Ending',
-    rating: 5,
-    upvotes: 73,
-    created_at: ago(1620),
-  },
-  {
-    id: 5,
-    type: 'review',
-    author_id: 'a8888888-8888-4888-8888-888888888888',
-    show_id: 5,
-    title: 'Unpopular opinion: Six is better as an album',
-    content: 'Live it is eighty minutes of very high energy and almost no variation in dynamics. Every number lands at the same intensity, so by queen four I had stopped registering the differences between them. On the cast recording you can skip around and it plays great. In the room it flattens out.',
-    image_url: null,
-    rating: 3,
-    upvotes: 29,
-    created_at: ago(1980),
-  },
-  {
-    id: 6,
-    type: 'review',
-    author_id: 'a6666666-6666-4666-8666-666666666666',
+    author_id: ELLIS,
     show_id: 6,
-    title: 'Merrily finally has a production that solves the structure',
-    content: 'The reverse chronology has always been the thing productions have to survive rather than use. This one uses it. By the time you reach the rooftop you have watched three people become strangers in real time and the sweetness is unbearable rather than saccharine. Casting actors who can actually play the age range is apparently the entire trick.',
-    image_url: 'https://placehold.co/800x500/14110E/F2C230?text=Merrily',
-    rating: 5,
-    upvotes: 84,
-    created_at: ago(2880),
+    title: 'The transfer is better than the original and I will take questions',
+    content:
+      'The 1981 cast album is scripture, and I am not arguing with scripture. I am arguing with the idea that a first attempt is automatically the truest one. This company plays the reverse chronology as a slow loss of nerve rather than a stunt, and the second act lands like a door closing.\n\nWhat changed for me was the staging of "Not a Day Goes By." Held still, no ornament, three people who cannot look at each other. If you have only ever heard the show, you have heard the score. You have not seen the argument it is making.',
+    image_url: 'https://placehold.co/800x400/14110E/F2C230?text=Merrily+We+Roll+Along',
+    upvotes: 64,
   },
-  {
-    id: 7,
-    type: 'discussion',
-    author_id: 'a2222222-2222-4222-8222-222222222222',
-    show_id: 7,
-    title: 'Is the Sweeney proshot worth it if you saw it live?',
-    content: 'Genuine question rather than a review. I caught this in previews and I am trying to work out whether the filmed version captures the orchestra properly. My memory of the room is that the sound was overwhelming in a way I suspect does not survive compression. Anyone seen both?',
-    image_url: null,
-    rating: null,
-    upvotes: 21,
-    created_at: ago(3300),
-  },
-  {
-    id: 8,
-    type: 'review',
-    author_id: 'a3333333-3333-4333-8333-333333333333',
-    show_id: 8,
-    title: 'Into the Woods worked better stripped down than I expected',
-    content: 'I went in skeptical about a semi-staged transfer and came out convinced this is how the show should always be done. Without the machinery you actually listen to the lyrics, and the second act stops feeling like a lecture. The narrator staging is a small change that reframes the whole thing.',
-    image_url: 'https://placehold.co/800x500/14110E/F2C230?text=Into+the+Woods',
-    rating: 4,
-    upvotes: 52,
-    created_at: ago(4560),
-  },
-  {
-    id: 9,
-    type: 'review',
-    author_id: 'a5555555-5555-4555-8555-555555555555',
-    show_id: 9,
-    title: 'Next to Normal in a 200-seat house is a completely different show',
-    content: 'Saw this at a regional theatre last weekend and being eight feet from the actors changes what the show is about. On a big stage it is a rock musical about mental illness. In a small room it is a family sitting at a kitchen table having the worst conversation of their lives while you watch from across the room.',
-    image_url: 'https://placehold.co/800x500/14110E/F2C230?text=Next+to+Normal',
-    rating: 5,
-    upvotes: 44,
-    created_at: ago(5760),
-  },
-  {
-    id: 10,
-    type: 'review',
-    author_id: 'a1111111-1111-4111-8111-111111111111',
-    show_id: 10,
-    title: 'The Band\'s Visit is a masterclass in restraint',
-    content: 'Almost nothing happens and it is one of the most affecting evenings I have had in a theatre. The score understands that silence is a musical choice. Everyone talks about the big number but the quiet ones between strangers are where the show actually lives.',
-    image_url: null,
-    rating: 5,
-    upvotes: 61,
-    created_at: ago(7320),
-  },
-  {
-    id: 11,
-    type: 'discussion',
-    author_id: 'a8888888-8888-4888-8888-888888888888',
-    show_id: null,
-    title: 'What is the best cast recording to give someone who thinks they hate musicals?',
-    content: 'Collecting recommendations. My rule is nothing over two hours and nothing that requires knowing the plot. So far the answers I have gotten are wildly inconsistent, which I think means the question is good.',
-    image_url: null,
-    rating: null,
-    upvotes: 37,
-    created_at: ago(8280),
-  },
-  {
-    id: 12,
-    type: 'review',
-    author_id: 'a4444444-4444-4444-8444-444444444444',
-    show_id: 11,
-    title: 'Parade is devastating and I am not sure I can recommend it',
-    content: 'This is an extraordinary production of a show I found genuinely difficult to sit through, and I mean that as praise. It refuses to give you catharsis because there is not any available. Go if you are ready for it. Do not go on a whim.',
-    image_url: 'https://placehold.co/800x500/14110E/F2C230?text=Parade',
-    rating: 5,
-    upvotes: 57,
-    created_at: ago(10380),
-  },
-  {
-    id: 13,
-    type: 'review',
-    author_id: 'a3333333-3333-4333-8333-333333333333',
-    show_id: 12,
-    title: 'The Company reconception opened it up more than I expected',
-    content: 'I was ready to find the gender swap gimmicky and instead the show got sharper. The anxieties land differently when they are attached to a different set of social expectations, and the birthday framing suddenly has teeth.',
-    image_url: null,
-    rating: 4,
-    upvotes: 40,
-    created_at: ago(11520),
-  },
-  {
-    id: 14,
-    type: 'discussion',
-    author_id: 'a6666666-6666-4666-8666-666666666666',
-    show_id: 12,
-    title: 'Company gender-swap: does it actually change anything?',
-    content: 'Asking sincerely and I know there is a review on here arguing yes. I enjoyed it a great deal but came out unsure whether the reconception opened the show up or just relocated the same anxieties. Interested in people who have seen both versions staged well.',
-    image_url: null,
-    rating: null,
-    upvotes: 33,
-    created_at: ago(11880),
-  },
-  {
-    id: 15,
-    type: 'review',
-    author_id: 'a7777777-7777-4777-8777-777777777777',
-    show_id: 1,
-    title: 'Second Hadestown visit did not hold up',
-    content: 'Going back a year later I found the pacing slack in a way I did not notice the first time. Still a remarkable score and the design is beautiful, but the middle of act one sags badly once you know where it is going.',
-    image_url: null,
-    rating: 3,
-    upvotes: 26,
-    created_at: ago(13320),
-  },
-  {
-    id: 16,
-    type: 'review',
-    author_id: 'a2222222-2222-4222-8222-222222222222',
-    show_id: 7,
-    title: 'The orchestra is the reason to see this Sweeney',
-    content: 'Twenty-six players. You feel it in the floor. Whatever you think of the staging choices, hearing this score played at full strength is worth the ticket on its own.',
-    image_url: 'https://placehold.co/800x500/14110E/F2C230?text=Sweeney+Todd',
-    rating: 5,
-    upvotes: 55,
-    created_at: ago(15840),
-  },
-  {
-    id: 17,
-    type: 'review',
-    author_id: 'a1111111-1111-4111-8111-111111111111',
-    show_id: 3,
-    title: 'Funny for ninety minutes and then it takes everything from you',
-    content: 'Second review of this on here and I am not sorry. What nobody warns you about is how carefully the jokes are load-bearing. Every laugh in act one is setting up something in act two.',
-    image_url: null,
-    rating: 5,
-    upvotes: 31,
-    created_at: ago(18840),
-  },
-  {
-    id: 18,
-    type: 'discussion',
-    author_id: 'a5555555-5555-4555-8555-555555555555',
-    show_id: null,
-    title: 'How many times is too many times to see the same production?',
-    content: 'Asking for a friend. The friend is me. The number is six.',
-    image_url: null,
-    rating: null,
-    upvotes: 44,
-    created_at: ago(21600),
-  },
-  {
-    id: 19,
-    type: 'review',
-    author_id: 'a8888888-8888-4888-8888-888888888888',
-    show_id: 8,
-    title: 'Solid revival, oversold by everyone I know',
-    content: 'Perfectly good production that I enjoyed and would recommend at a matinee price. The problem is I was told it was transcendent and it was merely very competent, which is a hard note to land on.',
-    image_url: null,
-    rating: 3,
-    upvotes: 19,
-    created_at: ago(24960),
-  },
-  {
-    id: 20,
-    type: 'review',
-    author_id: 'a3333333-3333-4333-8333-333333333333',
-    show_id: 5,
-    title: 'Six on tour is tighter than the sit-down production',
-    content: 'Smaller house, same energy, and the sound mix was noticeably cleaner. If your only option is the tour, that is not a downgrade.',
-    image_url: null,
-    rating: 4,
-    upvotes: 22,
-    created_at: ago(28800),
-  },
-  {
-    id: 21,
-    type: 'discussion',
-    author_id: 'a4444444-4444-4444-8444-444444444444',
-    show_id: 11,
-    title: 'Content warnings for Parade — what would you tell a first-timer?',
-    content: 'Taking someone next month who does not know the history. Trying to work out how much to prepare them without flattening the experience. Advice welcome.',
-    image_url: null,
-    rating: null,
-    upvotes: 15,
-    created_at: ago(34560),
-  },
-  {
-    id: 22,
-    type: 'review',
-    author_id: 'a6666666-6666-4666-8666-666666666666',
-    show_id: 9,
-    title: 'The Broadway production still sets the bar',
-    content: 'Every version I have seen since is measured against this one. The lighting design alone taught me things about how a stage can represent an interior state.',
-    image_url: null,
-    rating: 4,
-    upvotes: 28,
-    created_at: ago(54720),
-  },
+  { id: 3, created_at: ago(60 * 26), author_id: QUIETRIOT, show_id: 1, title: 'Nobody talks about the sound design in Hadestown', content: null, image_url: null, upvotes: 38 },
+  { id: 4, created_at: ago(60 * 48), author_id: BALCONY, show_id: 2, title: 'Sunset Boulevard is all concept and no heart', content: null, image_url: null, upvotes: 27 },
+  { id: 5, created_at: ago(60 * 72), author_id: ELLIS, show_id: 4, title: 'Maybe Happy Ending made me cry on a Tuesday', content: null, image_url: null, upvotes: 19 },
+  { id: 6, created_at: ago(60 * 96), author_id: QUIETRIOT, show_id: null, title: "Cast a countertenor as the Phantom. That's the post.", content: null, image_url: null, upvotes: 9 },
+  { id: 7, created_at: ago(60 * 144), author_id: STANDING_O, show_id: 1, title: 'The turntable does half the storytelling', content: null, image_url: null, upvotes: 22 },
+  { id: 8, created_at: ago(60 * 24 * 14), author_id: MATINEE, show_id: 1, title: 'Which Orpheus did you see', content: null, image_url: null, upvotes: 14 },
+  { id: 9, created_at: ago(60 * 24 * 14 + 60), author_id: QUIETRIOT, show_id: 11, title: 'Parade deserved a longer run and everyone knows it', content: null, image_url: null, upvotes: 46 },
 ];
 
-// ------------------------------------------------------------ comments
+// ----------------------------------------------------------- comments
 export const comments = [
-  { id: 1, post_id: 1, author_id: 'a2222222-2222-4222-8222-222222222222',
-    content: 'Which cast did you see? I went in March and the turntable moment did not land the same way for me.',
-    created_at: ago(90) },
-  { id: 2, post_id: 1, author_id: 'a3333333-3333-4333-8333-333333333333',
-    content: 'Completely agree about the second act staging. Four visits is dedication though.',
-    created_at: ago(83) },
-  { id: 3, post_id: 1, author_id: 'a5555555-5555-4555-8555-555555555555',
-    content: 'Booking again because of this. I had written off a return trip.',
-    created_at: ago(76) },
-  { id: 4, post_id: 2, author_id: 'a1111111-1111-4111-8111-111111111111',
-    content: 'This is the most articulate version of my exact reaction. Impressed and unmoved, yes.',
-    created_at: ago(249) },
-  { id: 5, post_id: 2, author_id: 'a8888888-8888-4888-8888-888888888888',
-    content: 'Hard disagree, but this is a fair writeup rather than a hit piece, so thank you for that.',
-    created_at: ago(242) },
-  { id: 6, post_id: 3, author_id: 'a7777777-7777-4777-8777-777777777777',
-    content: 'The bowling alley set. I was not ready either.',
-    created_at: ago(595) },
-  { id: 7, post_id: 3, author_id: 'a6666666-6666-4666-8666-666666666666',
-    content: 'The point about it refusing sentimentality until it earns it is exactly right.',
-    created_at: ago(588) },
-  { id: 8, post_id: 4, author_id: 'a1111111-1111-4111-8111-111111111111',
-    content: 'Went in blind on this recommendation. Correct call. Do not read anything first.',
-    created_at: ago(1541) },
-  { id: 9, post_id: 4, author_id: 'a3333333-3333-4333-8333-333333333333',
-    content: 'The design work is the best I have seen in a decade and it is not close.',
-    created_at: ago(1534) },
-  { id: 10, post_id: 5, author_id: 'a4444444-4444-4444-8444-444444444444',
-    content: 'You are in the minority, but the dynamics point is real. It is very loud for eighty straight minutes.',
-    created_at: ago(1887) },
-  { id: 11, post_id: 5, author_id: 'a5555555-5555-4555-8555-555555555555',
-    content: 'Saw the tour last month and felt this exactly. Great album, exhausting evening.',
-    created_at: ago(1880) },
-  { id: 12, post_id: 6, author_id: 'a1111111-1111-4111-8111-111111111111',
-    content: 'Casting actors who can play the age range being the whole trick is the best observation I have read about this show.',
-    created_at: ago(2773) },
-  { id: 13, post_id: 6, author_id: 'a2222222-2222-4222-8222-222222222222',
-    content: 'The rooftop scene destroyed me. I have never seen the ending work like that.',
-    created_at: ago(2766) },
-  { id: 14, post_id: 7, author_id: 'a6666666-6666-4666-8666-666666666666',
-    content: 'Seen both. The proshot captures more than you would expect, but you are right that the low end does not survive.',
-    created_at: ago(3179) },
-  { id: 15, post_id: 7, author_id: 'a8888888-8888-4888-8888-888888888888',
-    content: 'Watch it with actual speakers rather than a laptop and it gets most of the way there.',
-    created_at: ago(3172) },
-  { id: 16, post_id: 8, author_id: 'a5555555-5555-4555-8555-555555555555',
-    content: 'The narrator change is such a small thing and it reframes the entire second act. Good catch.',
-    created_at: ago(4425) },
-  { id: 17, post_id: 9, author_id: 'a7777777-7777-4777-8777-777777777777',
-    content: 'Eight feet from the actors is a completely different artform. This is why I stopped buying rear mezzanine.',
-    created_at: ago(5618) },
-  { id: 18, post_id: 9, author_id: 'a4444444-4444-4444-8444-444444444444',
-    content: 'Which regional house? Trying to work out if it is still running.',
-    created_at: ago(5611) },
-  { id: 19, post_id: 10, author_id: 'a3333333-3333-4333-8333-333333333333',
-    content: 'Silence as a musical choice. Yes. Nobody writes about this show properly and you just did.',
-    created_at: ago(7164) },
-  { id: 20, post_id: 11, author_id: 'a6666666-6666-4666-8666-666666666666',
-    content: 'Something under two hours with a plot you can follow from the songs alone. That narrows it more than people expect.',
-    created_at: ago(8117) },
-  { id: 21, post_id: 11, author_id: 'a1111111-1111-4111-8111-111111111111',
-    content: 'Honestly? Start with a proshot instead. The staging does half the work of explaining why anyone is singing.',
-    created_at: ago(8110) },
-  { id: 22, post_id: 12, author_id: 'a2222222-2222-4222-8222-222222222222',
-    content: 'Appreciate the warning at the end. That is a responsible way to recommend this one.',
-    created_at: ago(10203) },
-  { id: 23, post_id: 14, author_id: 'a3333333-3333-4333-8333-333333333333',
-    content: 'I wrote the review above arguing yes, so I am biased, but the birthday framing genuinely lands differently.',
-    created_at: ago(11696) },
-  { id: 24, post_id: 18, author_id: 'a8888888-8888-4888-8888-888888888888',
-    content: 'Six is fine. Six is normal. Please do not look at my ticket folder.',
-    created_at: ago(21409) },
+  { id: 1, created_at: ago(180), post_id: 2, author_id: QUIETRIOT, content: 'Correct, and the orchestrations are thinner on purpose. You can hear the room.' },
+  { id: 2, created_at: ago(120), post_id: 2, author_id: MEZZO, content: 'I will take the questions instead. Question one: have you listened to the 1981 album this year, or are you remembering it?' },
+  { id: 3, created_at: ago(41), post_id: 2, author_id: BALCONY, content: 'Saw it twice. The second time I watched only the friends in the background and cried harder.' },
+  { id: 4, created_at: ago(60), post_id: 1, author_id: ELLIS, content: 'Bring back the block party energy.' },
+  { id: 5, created_at: ago(60 * 20), post_id: 3, author_id: MATINEE, content: 'The bridge cue during the wedding always gets me.' },
 ];

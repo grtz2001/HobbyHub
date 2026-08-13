@@ -1,0 +1,14 @@
+.post-form-page {
+  max-width: 560px;
+  padding-top: 48px;
+  padding-bottom: 76px;
+}
+
+.post-form-page h2 {
+  margin-bottom: 34px;
+  font-size: 34px;
+}
+
+.post-form-page h2 + .meta {
+  margin: -28px 0 30px;
+}

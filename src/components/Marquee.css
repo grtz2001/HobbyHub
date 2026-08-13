@@ -1,0 +1,136 @@
+.marquee {
+  background: var(--ink);
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  border-bottom: 2px solid var(--ink);
+}
+
+.marquee__wordmark {
+  font-family: var(--font-display);
+  font-size: 40px;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--marquee);
+  text-decoration: none;
+}
+
+.marquee__link {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--paper);
+  text-decoration: none;
+}
+
+.marquee__link:hover {
+  color: var(--marquee);
+}
+
+.marquee__search {
+  flex: 1 1 200px;
+  min-width: 140px;
+  max-width: 320px;
+  background: var(--paper-deep);
+  border: 1px solid var(--paper-deep);
+  padding: 11px 12px;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.marquee__right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.marquee__button {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--paper);
+  color: var(--ink);
+  border: 2px solid transparent;
+  padding: 11px 18px;
+  text-decoration: none;
+}
+
+.marquee__button:hover {
+  background: var(--marquee);
+  color: var(--ink);
+}
+
+.marquee__profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.marquee__avatar {
+  width: 30px;
+  height: 30px;
+  background: var(--marquee);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.marquee__name {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--paper);
+}
+
+.marquee__theme {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  color: var(--paper);
+  border: 2px solid var(--paper);
+  padding: 9px 12px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.marquee__theme:hover {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.marquee__bulb {
+  width: 10px;
+  height: 10px;
+  background: var(--marquee);
+  display: block;
+}
+
+@media (max-width: 720px) {
+  .marquee__search {
+    order: 10;
+    flex-basis: 100%;
+    max-width: none;
+  }
+}

@@ -1,0 +1,25 @@
+.bravo-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--ink);
+  color: var(--paper);
+  border: 2px solid transparent;
+  padding: 13px 20px;
+  cursor: pointer;
+}
+
+.bravo-button:hover {
+  background: var(--paper);
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
+.bravo-button__triangle {
+  font-size: 11px;
+}

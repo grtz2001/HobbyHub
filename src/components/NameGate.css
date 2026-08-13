@@ -1,0 +1,53 @@
+.name-gate {
+  min-height: 100vh;
+  background: var(--paper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.name-gate__panel {
+  border: 2px solid var(--ink);
+  padding: 44px 40px;
+  max-width: 420px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: center;
+  text-align: center;
+}
+
+.name-gate__panel h1 {
+  font-size: 34px;
+  line-height: 1.05;
+}
+
+.name-gate__subtitle {
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+.name-gate__panel input {
+  width: 100%;
+  background: var(--paper-deep);
+  border: 1px solid var(--ink);
+  padding: 12px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.name-gate__panel .btn {
+  width: 100%;
+  justify-content: center;
+  padding: 15px;
+}
+
+.name-gate__error {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  color: var(--danger);
+}

@@ -1,7 +1,7 @@
 // src/api/comments.js
 //
-// Comments belong to a post and are written by a profile. In Supabase you
-// fetch them with .select('*, profiles(id, display_name)') so the author
+// Comments belong to a post and are written by a profile. In Supabase these
+// come back with .select('*, profiles(id, display_name)') so the author
 // arrives attached — that's the shape these functions return.
 
 import { comments, profiles } from '../data/dummy.js';
@@ -27,24 +27,21 @@ export async function getComments(postId) {
 }
 
 /**
- * Add a comment.
- *
- * Returns the new row with its author already attached, so the caller can
- * append it to state instead of refetching the whole list:
- *   setComments(cs => [...cs, created]);
+ * Add a comment. Returns the new row with its author already attached, so
+ * the caller can append it to state instead of refetching the whole list.
  */
-export async function createComment({ post_id, author_id, content }) {
+export async function createComment({ postId, authorId, content }) {
   await wait();
 
   if (!content?.trim()) throw new Error('A comment cannot be empty.');
-  if (!author_id) throw new Error('A comment needs an author.');
+  if (!authorId) throw new Error('A comment needs an author.');
 
   const comment = {
     id: Math.max(0, ...comments.map((c) => c.id)) + 1,
-    post_id: Number(post_id),
-    author_id,
-    content: content.trim(),
     created_at: new Date().toISOString(),
+    post_id: Number(postId),
+    author_id: authorId,
+    content: content.trim(),
   };
 
   comments.push(comment);

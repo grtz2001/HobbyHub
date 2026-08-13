@@ -1,0 +1,27 @@
+.home-feed {
+  max-width: 780px;
+  padding-top: 44px;
+  padding-bottom: 72px;
+}
+
+.home-feed__controls {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 14px;
+}
+
+.home-feed__controls select {
+  background: var(--paper-deep);
+  border: 1px solid var(--ink);
+  padding: 9px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.home-feed__rows {
+  border-top: var(--rule-hair);
+}

@@ -1,0 +1,60 @@
+.show-picker input {
+  width: 100%;
+  background: var(--paper-deep);
+  border: 1px solid var(--ink);
+  padding: 12px;
+  font-size: 14px;
+}
+
+.show-picker__results {
+  border: 1px solid var(--ink);
+  border-top: none;
+  background: var(--paper-deep);
+}
+
+.show-picker__results button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  border-top: var(--rule-hair);
+  padding: 12px;
+  cursor: pointer;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.show-picker__results button:hover {
+  background: var(--marquee);
+  color: var(--ink);
+}
+
+.show-picker__add {
+  color: var(--ink-soft);
+}
+
+.show-picker__selected {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--paper-deep);
+  border: 1px solid var(--ink);
+  padding: 10px 12px;
+}
+
+.show-picker__selected span {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.show-picker__selected .btn-outline {
+  margin-left: auto;
+  padding: 4px 9px;
+  font-size: 11px;
+}

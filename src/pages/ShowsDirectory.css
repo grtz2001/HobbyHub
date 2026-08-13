@@ -1,0 +1,32 @@
+.shows-directory {
+  max-width: 1080px;
+  padding-top: 48px;
+  padding-bottom: 76px;
+}
+
+.shows-directory h2 {
+  margin-bottom: 8px;
+  font-size: 34px;
+}
+
+.shows-directory__count {
+  margin-bottom: 36px;
+}
+
+.shows-directory__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 40px 32px;
+}
+
+@media (max-width: 720px) {
+  .shows-directory__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .shows-directory__grid {
+    grid-template-columns: 1fr;
+  }
+}
